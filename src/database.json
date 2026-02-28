@@ -1,0 +1,24 @@
+{
+  "groups": {},
+  "commands": {},
+  "settings": {
+    "prefix": "!",
+    "autodelete": false,
+    "antilink": false,
+    "welcome": {
+      "enabled": false,
+      "message": "Olá {nome}, seja bem-vindo(a) ao {grupo}! 👋",
+      "image": null,
+      "caption": "",
+      "autoDelete": 0
+    },
+    "farewell": {
+      "enabled": false,
+      "message": "Até mais, {nome}! Sentiremos sua falta no {grupo}! 👋",
+      "caption": "",
+      "autoDelete": 0,
+      "withMention": true,
+      "withReason": true
+    }
+  }
+}

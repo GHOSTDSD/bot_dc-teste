@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ares Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sb">
+        <div class="sb-top">
+            <span class="sb-logo">Ares</span>
+            <span class="sb-tag">v2.0</span>
+        </div>
+        <nav>
+            <div class="nav-grp-label">Geral</div>
+            <div class="nav-a on" data-page="dashboard">
+                <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg>
+                Dashboard
+            </div>
+            <div class="nav-a" data-page="commands">
+                <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><polyline points="2,5 6,8 2,11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="11" x2="14" y2="11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                Comandos
+            </div>
+            <div class="nav-a" data-page="groups">
+                <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M1 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="12" cy="5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M13.5 13c0-1.66-1-3-2.5-3.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                Grupos
+            </div>
+            <div class="nav-grp-label">Configurações</div>
+            <div class="nav-a" data-page="settings">
+                <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.22 3.22l1.42 1.42M11.36 11.36l1.42 1.42M3.22 12.78l1.42-1.42M11.36 4.64l1.42-1.42" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                Configurações
+            </div>
+            <div class="nav-a" data-page="perso">
+                <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><path d="M8 1.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v2.5M5.5 9.5C5.5 8.12 6.62 7 8 7s2.5 1.12 2.5 2.5v1.5h-5V9.5z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="1.5" y="1.5" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.4"/></svg>
+                Config. Perso
+            </div>
+            <div class="nav-a" data-page="logs">
+                <svg width="15" height="15" fill="none" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.4"/><line x1="5" y1="5.5" x2="11" y2="5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="5" y1="8" x2="11" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="5" y1="10.5" x2="8" y2="10.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                Logs
+            </div>
+        </nav>
+        <div class="sb-foot">
+            <div class="dot"></div>
+            <span class="dot-lbl" id="sb-status">Aguardando...</span>
+        </div>
+    </aside>
+
+    <header class="topbar">
+        <span class="topbar-logo">Ares <span style="color:var(--t3);font-size:11px;font-weight:400">v2.0</span></span>
+        <div class="topbar-status">
+            <div class="topbar-dot"></div>
+            <span class="topbar-lbl" id="top-status">Aguardando...</span>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <div class="pg on" id="page-dashboard">
+            <div class="ph">
+                <div class="ph-title">Dashboard</div>
+                <div class="ph-sub">Visão geral do AresBot v2.0</div>
+            </div>
+            <div class="stats">
+                <div class="stat"><div class="stat-k">Uptime</div><div class="stat-v">99.9%</div></div>
+                <div class="stat"><div class="stat-k">Latência</div><div class="stat-v" id="lat">—</div></div>
+                <div class="stat"><div class="stat-k">Memória</div><div class="stat-v">142mb</div></div>
+            </div>
+        </div>
+
+        <div class="pg" id="page-commands">
+            <div class="ph">
+                <div class="ph-title">Comandos</div>
+                <div class="ph-sub">Ative ou desative os gatilhos</div>
+            </div>
+            <div class="grid" id="cmd-grid">
+                <div class="empty">
+                    <svg width="30" height="30" fill="none" viewBox="0 0 24 24"><polyline points="4,7 9,12 4,17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <p>Nenhum comando carregado.<br>Conecte o bot para ver.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pg" id="page-groups">
+            <div class="ph">
+                <div class="ph-title">Grupos</div>
+                <div class="ph-sub" id="grp-sub">Carregando...</div>
+            </div>
+            <div class="grid" id="grp-grid">
+                <div class="empty">
+                    <svg width="30" height="30" fill="none" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M2 21c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <p>Nenhum grupo encontrado.<br>O bot precisa estar em algum grupo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pg" id="page-settings">
+            <div class="ph"><div class="ph-title">Configurações</div><div class="ph-sub">Parâmetros gerais do bot</div></div>
+        </div>
+
+        <div class="pg" id="page-perso">
+            <div class="ph">
+                <div class="ph-title">Config. Perso</div>
+                <div class="ph-sub">Personalize as mensagens automáticas do bot</div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn on" data-tab="welcome">Boas Vindas</button>
+                <button class="tab-btn" data-tab="farewell">Despedida</button>
+            </div>
+
+            <div class="tab-pane on" id="tab-welcome">
+                <div class="cfg-card open">
+                    <div class="cfg-card-head">
+                        <div class="cfg-card-head-left">
+                            <div class="cfg-icon">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="currentColor" stroke-width="1.6"/><path d="M8 12s1 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/></svg>
+                            </div>
+                            <div class="cfg-head-text">
+                                <div class="cfg-head-title">Mensagem de Boas Vindas</div>
+                                <div class="cfg-head-sub">Enviada quando alguém entra no grupo</div>
+                            </div>
+                        </div>
+                        <div class="cfg-head-right">
+                            <button class="pill on" data-name="welcome-toggle" id="pill-welcome"></button>
+                            <div class="cfg-chevron">
+                                <svg width="14" height="14" fill="none" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cfg-body">
+                        <div class="cfg-full-row">
+                            <div class="cfg-full-label">Mensagem</div>
+                            <div class="cfg-full-sub">Use {nome} para o usuário, {grupo} para o nome do grupo, {hour} para a hora de entrada</div>
+                            <textarea class="cfg-textarea" rows="4" placeholder="Olá {nome}, seja bem-vindo(a) ao {grupo}! às {hour} 👋" id="welcome-msg">Olá {nome}, seja bem-vindo(a) ao {grupo}! às {hour} 👋</textarea>
+                        </div>
+                        
+                        <div class="cfg-full-row">
+                            <div class="cfg-full-label">Com Imagem</div>
+                            <div class="cfg-row-sub" style="margin-bottom: 12px;">Ative para enviar uma imagem personalizada</div>
+                            
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                <button class="pill" id="welcome-with-image"></button>
+                                <span style="color: var(--t2); font-size: 12px;" id="welcome-image-status">Imagem personalizada desativada</span>
+                            </div>
+                            
+                            <div id="welcome-image-section" style="display: none; margin-top: 16px; padding: 16px; background: var(--s2); border-radius: 8px; border: 1px solid var(--line);">
+                                <div class="cfg-full-label" style="margin-bottom: 8px;">Link da Imagem</div>
+                                <div class="cfg-row-sub" style="margin-bottom: 12px;">Se deixar vazio, será usada a foto de perfil do usuário</div>
+                                
+                                <input class="cfg-input" type="url" placeholder="https://exemplo.com/imagem.jpg" id="welcome-image-url" style="width: 100%; margin-bottom: 12px;">
+                                
+                                <div id="welcome-url-preview" style="display: none; margin-top: 12px;">
+                                    <div style="font-size: 11px; color: var(--t3); margin-bottom: 8px;">Pré-visualização:</div>
+                                    <img id="welcome-url-preview-img" style="max-width: 100%; max-height: 150px; border-radius: 8px; display: block;">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cfg-row">
+                            <div>
+                                <div class="cfg-row-label">Legenda da imagem</div>
+                                <div class="cfg-row-sub">Texto opcional que aparecerá junto com a imagem</div>
+                            </div>
+                            <input class="cfg-input" type="text" placeholder="Ex: Seja bem-vindo!" id="welcome-caption" style="width: 200px;">
+                        </div>
+                        
+                        <div class="cfg-row">
+                            <div>
+                                <div class="cfg-row-label">Auto-deletar após</div>
+                                <div class="cfg-row-sub">0 = não deletar</div>
+                            </div>
+                            <select class="cfg-select" id="welcome-auto-delete">
+                                <option value="0">Não deletar</option>
+                                <option value="30">30 segundos</option>
+                                <option value="60">1 minuto</option>
+                                <option value="300">5 minutos</option>
+                                <option value="600">10 minutos</option>
+                            </select>
+                        </div>
+
+                        <button class="btn-preview" onclick="openWhatsAppPreview('welcome')">
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12c0 2.22.72 4.32 1.94 6.02L2 22l4.02-1.98C7.68 21.28 9.78 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M17 14.5c-.3.9-1.5 1.5-2.5 1.5-2 0-4-1.5-5-3.5-.6-1-.9-2.1-.5-3 .1-.3.3-.6.6-.8.2-.2.5-.3.8-.3h.5c.2 0 .4.1.5.2.3.3.7.9.9 1.2.1.2.1.4 0 .6-.1.2-.2.4-.3.5-.1.1-.2.2-.3.3-.2.2-.2.4-.1.6.3.5.7.9 1.2 1.2.2.1.4.1.6-.1.1-.1.2-.2.3-.3.1-.1.3-.2.5-.3.2-.1.4-.1.6 0 .4.2.9.6 1.2.9.1.2.2.4.1.6z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            Ver prévia no WhatsApp
+                        </button>
+
+                        <div class="cfg-save-row">
+                            <button class="btn-save" onclick="saveWelcomeConfig()">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="tab-farewell">
+                <div class="cfg-card open">
+                    <div class="cfg-card-head">
+                        <div class="cfg-card-head-left">
+                            <div class="cfg-icon">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" stroke="currentColor" stroke-width="1.6"/><path d="M8 15s1-2 4-2 4 2 4 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/></svg>
+                            </div>
+                            <div class="cfg-head-text">
+                                <div class="cfg-head-title">Mensagem de Despedida</div>
+                                <div class="cfg-head-sub">Enviada quando alguém sai do grupo</div>
+                            </div>
+                        </div>
+                        <div class="cfg-head-right">
+                            <button class="pill" data-name="farewell-toggle" id="pill-farewell"></button>
+                            <div class="cfg-chevron">
+                                <svg width="14" height="14" fill="none" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cfg-body">
+                        <div class="cfg-full-row">
+                            <div class="cfg-full-label">Mensagem</div>
+                            <div class="cfg-full-sub">Use {nome} para o usuário, {grupo} para o nome do grupo, {hour} para a hora de saída</div>
+                            <textarea class="cfg-textarea" rows="4" placeholder="Até mais, {nome}. Sentiremos sua falta no {grupo}! às {hour} 👋" id="farewell-msg">Até mais, {nome}. Sentiremos sua falta no {grupo}! às {hour} 👋</textarea>
+                        </div>
+                        
+                        <div class="cfg-full-row">
+                            <div class="cfg-full-label">Com Imagem</div>
+                            <div class="cfg-row-sub" style="margin-bottom: 12px;">Ative para enviar uma imagem personalizada</div>
+                            
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                                <button class="pill" id="farewell-with-image"></button>
+                                <span style="color: var(--t2); font-size: 12px;" id="farewell-image-status">Imagem personalizada desativada</span>
+                            </div>
+                            
+                            <div id="farewell-image-section" style="display: none; margin-top: 16px; padding: 16px; background: var(--s2); border-radius: 8px; border: 1px solid var(--line);">
+                                <div class="cfg-full-label" style="margin-bottom: 8px;">Link da Imagem</div>
+                                <div class="cfg-row-sub" style="margin-bottom: 12px;">Se deixar vazio, será usada a foto de perfil do usuário</div>
+                                
+                                <input class="cfg-input" type="url" placeholder="https://exemplo.com/imagem.jpg" id="farewell-image-url" style="width: 100%; margin-bottom: 12px;">
+                                
+                                <div id="farewell-url-preview" style="display: none; margin-top: 12px;">
+                                    <div style="font-size: 11px; color: var(--t3); margin-bottom: 8px;">Pré-visualização:</div>
+                                    <img id="farewell-url-preview-img" style="max-width: 100%; max-height: 150px; border-radius: 8px; display: block;">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cfg-row">
+                            <div>
+                                <div class="cfg-row-label">Legenda da imagem</div>
+                                <div class="cfg-row-sub">Texto opcional que aparecerá junto com a imagem</div>
+                            </div>
+                            <input class="cfg-input" type="text" placeholder="Ex: Até mais!" id="farewell-caption" style="width: 200px;">
+                        </div>
+                        
+                        <div class="cfg-row">
+                            <div>
+                                <div class="cfg-row-label">Enviar com menção</div>
+                                <div class="cfg-row-sub">Menciona o usuário na mensagem</div>
+                            </div>
+                            <button class="pill on" data-name="farewell-mention" id="farewell-mention"></button>
+                        </div>
+                        <div class="cfg-row">
+                            <div>
+                                <div class="cfg-row-label">Motivo de saída</div>
+                                <div class="cfg-row-sub">Mostrar se foi removido ou saiu</div>
+                            </div>
+                            <button class="pill on" data-name="farewell-reason" id="farewell-reason"></button>
+                        </div>
+                        <div class="cfg-row">
+                            <div>
+                                <div class="cfg-row-label">Auto-deletar após</div>
+                                <div class="cfg-row-sub">0 = não deletar</div>
+                            </div>
+                            <select class="cfg-select" id="farewell-auto-delete">
+                                <option value="0">Não deletar</option>
+                                <option value="30">30 segundos</option>
+                                <option value="60">1 minuto</option>
+                                <option value="300">5 minutos</option>
+                                <option value="600">10 minutos</option>
+                            </select>
+                        </div>
+
+                        <button class="btn-preview" onclick="openWhatsAppPreview('farewell')">
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12c0 2.22.72 4.32 1.94 6.02L2 22l4.02-1.98C7.68 21.28 9.78 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M17 14.5c-.3.9-1.5 1.5-2.5 1.5-2 0-4-1.5-5-3.5-.6-1-.9-2.1-.5-3 .1-.3.3-.6.6-.8.2-.2.5-.3.8-.3h.5c.2 0 .4.1.5.2.3.3.7.9.9 1.2.1.2.1.4 0 .6-.1.2-.2.4-.3.5-.1.1-.2.2-.3.3-.2.2-.2.4-.1.6.3.5.7.9 1.2 1.2.2.1.4.1.6-.1.1-.1.2-.2.3-.3.1-.1.3-.2.5-.3.2-.1.4-.1.6 0 .4.2.9.6 1.2.9.1.2.2.4.1.6z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            Ver prévia no WhatsApp
+                        </button>
+
+                        <div class="cfg-save-row">
+                            <button class="btn-save" onclick="saveFarewellConfig()">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pg" id="page-logs">
+            <div class="ph"><div class="ph-title">Logs</div><div class="ph-sub">Histórico de eventos</div></div>
+        </div>
+
+    </main>
+</div>
+
+<nav class="bottom-nav">
+    <div class="bn-item on" data-page="dashboard">
+        <svg width="20" height="20" fill="none" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg>
+        <span>Início</span>
+    </div>
+    <div class="bn-item" data-page="commands">
+        <svg width="20" height="20" fill="none" viewBox="0 0 16 16"><polyline points="2,5 6,8 2,11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="11" x2="14" y2="11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>Comandos</span>
+    </div>
+    <div class="bn-item" data-page="groups">
+        <svg width="20" height="20" fill="none" viewBox="0 0 16 16"><circle cx="6" cy="5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M1 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="12" cy="5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M13.5 13c0-1.66-1-3-2.5-3.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>Grupos</span>
+    </div>
+    <div class="bn-item" data-page="perso">
+        <svg width="20" height="20" fill="none" viewBox="0 0 16 16"><path d="M8 1.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v2.5M5.5 9.5C5.5 8.12 6.62 7 8 7s2.5 1.12 2.5 2.5v1.5h-5V9.5z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="1.5" y="1.5" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.4"/></svg>
+        <span>Perso</span>
+    </div>
+</nav>
+
+<button class="fab hide" id="fab">
+    <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="7" x2="13" y2="7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+</button>
+
+<div class="ov hide" id="ov-cmd">
+    <div class="sheet">
+        <div class="sh-title">Novo comando</div>
+        <div class="sh-sub">Defina o gatilho e a resposta automática</div>
+        <div class="field">
+            <label>Gatilho</label>
+            <input type="text" id="in-trig" placeholder="!ping" autocomplete="off">
+        </div>
+        <div class="field">
+            <label>Resposta</label>
+            <textarea id="in-resp" rows="4" placeholder="Pong!"></textarea>
+        </div>
+        <div class="sh-actions">
+            <button class="btn btn-g" id="cmd-cancel">Cancelar</button>
+            <button class="btn btn-p" id="cmd-create">Criar</button>
+        </div>
+    </div>
+</div>
+
+<div class="ov" id="ov-qr">
+    <div class="qr-sheet">
+        <div class="qr-title">Conectar</div>
+        <div class="qr-sub">Escaneie com o WhatsApp</div>
+        <div class="spin-wrap" id="qr-loader"><div class="spin"></div><span>Aguardando...</span></div>
+        <div class="hide" id="qr-box">
+            <div class="qr-img-wrap"><img id="qr-img" alt="QR"></div>
+            <div class="qr-hint">WhatsApp → Dispositivos → Conectar dispositivo</div>
+        </div>
+    </div>
+</div>
+
+<div class="ov hide" id="ov-wa-preview">
+    <div class="wa-preview">
+        <div class="wa-header">
+            <div class="wa-avatar">👤</div>
+            <div class="wa-info">
+                <div class="wa-name">Grupo de Teste</div>
+                <div class="wa-status">
+                    <span class="wa-status-dot"></span>
+                    <span>online</span>
+                </div>
+            </div>
+        </div>
+        <div class="wa-chat" id="wa-chat">
+            <div class="wa-message system" id="wa-system-msg">João entrou no grupo</div>
+            <div class="wa-message other" id="wa-bot-msg">
+                <span id="wa-msg-content">Olá João, seja bem-vindo(a) ao Grupo de Teste! às 14:30 👋</span>
+                <div class="wa-time">12:34</div>
+            </div>
+        </div>
+        <div class="wa-footer">
+            <input type="text" class="wa-input" placeholder="Mensagem" value="Mensagem de teste" readonly>
+            <button class="wa-send">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "antilink": true,
+  "autoban": false,
+  "welcome": true,
+  "add_parceria": false,
+  "ban": true,
+  "rm_adv": true,
+  "del_parceria": true,
+  "limpar_adv": true,
+  "lista_adv": false,
+  "menuadm": true,
+  "parceria": true,
+  "ver_adv": true,
+  "groups": {
+    "120363424404937254@g.us": true
+  },
+  "commands": {
+    "add_parceria": true,
+    "ban": true,
+    "del_parceria": true,
+    "limpar_adv": true,
+    "lista_adv": true,
+    "menuadm": true,
+    "parceria": true,
+    "rm_adv": true,
+    "ver_adv": true,
+    "op": true,
+    "suport": true,
+    "adverter": true,
+    "": true,
+    "mute": true
+  },
+  "settings": {
+    "prefix": "!",
+    "autodelete": false,
+    "antilink": false,
+    "welcome": {
+      "enabled": true,
+      "message": "Seja Bem-Vindo ao {grupo}  {hour}",
+      "caption": "",
+      "autoDelete": 0,
+      "withImage": true,
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjOCLrn7bBqmeaYwyikHHe9zFTlCe1fEokXg&s"
+    },
+    "farewell": {
+      "enabled": true,
+      "message": "Até mais, {nome}. Sentiremos sua falta no {grupo}!  {hour} 👋",
+      "caption": "",
+      "autoDelete": 0,
+      "withImage": true,
+      "imageUrl": "https://t4.ftcdn.net/jpg/07/32/10/81/360_F_732108134_fJIaxPtPWeZ6NB9oOrspxZ2YsAk7EDJ8.jpg",
+      "withMention": true,
+      "withReason": true
+    }
+  }
+}
